@@ -6,6 +6,11 @@ let objects = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  for(let i=10; i>0; i--){
+    objects.push(new AnimatedObject(random(width),400));
+    objects.push(new CircleObject());
+    objects.push(new LineObject());
+  }
 }
 
 function draw() {

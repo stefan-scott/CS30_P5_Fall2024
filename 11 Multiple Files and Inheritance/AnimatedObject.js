@@ -6,13 +6,15 @@ class AnimatedObject{
     }
 
     move(){ //have a 'wiggle' effect
-        
+        this.x += random(-2,2);
+        this.y += random(-2,2);
     }
 
-
-
-
-
+    display(){
+        strokeWeight(4);
+        point(this.x, this.y);
+    }
+    
 }
 
 
