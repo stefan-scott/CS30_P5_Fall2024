@@ -35,15 +35,28 @@ function setup() {
 
 }
 
-function keyPressed(){
-  if(key===" "){
-    if(gorillaState===0) gorillaState = 1;
+function keyPressed() {
+  if (key === " ") {
+    if (gorillaState === 0) gorillaState = 1;
     else gorillaState = 0;
   }
 }
 
+function mousePressed(){
+  spiralObjects.push( new Spiral(mouseX, mouseY) );
+}
+
 function draw() {
   background(220);
+  //Spiral Code
+  for(let i = 0; i<spiralObjects.length; i++){
+    spiralObjects[i].display();
+    if(spiralObjects[i].active === false){
+      spiralObjects.splice(i, 1);
+      i--; //make sure we don't skip an item on deletion...
+    }
+  }
+
 
   //Gorilla Code
   if (gorillaState === 0) { //IDLE
@@ -60,4 +73,23 @@ function draw() {
       if (swipeIndex > 5) swipeIndex = 0;
     }
   }
+}
+
+class Spiral {
+  constructor(x, y) { //runs once, each time an object is made
+    this.x = x; this.y = y;
+    this.currentFrame = 0;
+    this.active = true;
+  }
+  //class methods
+  display() { //0-15
+    if(this.currentFrame > 15){
+      this.active = false;
+    }
+    else{
+      image(spiralImages[this.currentFrame], this.x, this.y);
+      if(frameCount % 3 === 0) this.currentFrame++;
+    }
+  }
+  
 }
