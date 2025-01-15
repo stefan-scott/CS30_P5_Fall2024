@@ -35,6 +35,13 @@ function setup() {
 
 }
 
+function keyPressed(){
+  if(key===" "){
+    if(gorillaState===0) gorillaState = 1;
+    else gorillaState = 0;
+  }
+}
+
 function draw() {
   background(220);
 
@@ -47,6 +54,10 @@ function draw() {
     }
   }
   else if (gorillaState === 1) {//SWIPE
-
+    image(gorillaSwipe[swipeIndex], width / 2, height / 2);
+    if (frameCount % 10 === 0) {
+      swipeIndex++; //0, 1, 2, 3, 4, 5    6!!!
+      if (swipeIndex > 5) swipeIndex = 0;
+    }
   }
 }
